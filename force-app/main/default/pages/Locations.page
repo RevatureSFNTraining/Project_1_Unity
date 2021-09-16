@@ -1,4 +1,23 @@
 <apex:page doctype="html-5.0" controller="DepotController">
+    <style type="text/css">
+        .depotDisplayName {
+            font-size: 14pt;
+            padding-bottom: 16px;
+        }
+        .depotEntries {
+            margin: 16px 0 16px 0;
+        }
+        .depotEntries>tbody>tr>td {
+            border-color: black;
+            border-style: solid;
+            border-width: 2px;
+
+            padding: 8px;
+        }
+        .depotEntry td {
+            padding: 4px 8px 4px 8px;
+        }
+    </style>
     <apex:form >
         <apex:pageBlock title="Company">
             <apex:outputLabel value="Select your company: " />
@@ -8,51 +27,49 @@
             </apex:selectList>
         </apex:pageBlock>
         <apex:pageBlock id="depotData" title="Depots">
-            <div class="filters">
-                <h3>Filters:</h3>
-                <table>
-                    <tr>
-                        <td>Depot Name:</td>
-                        <td>
-                            <apex:input type="search" value="{!nameFilter}">
-                                <apex:actionSupport event="onchange" action="{!filterDepots}" rerender="depotData" />
-                            </apex:input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Address:</td>
-                        <td>
-                            <apex:input type="search" value="{!locationFilter}">
-                                <apex:actionSupport event="onchange" action="{!filterDepots}" rerender="depotData" />
-                            </apex:input>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="depotListView">
+            <apex:pageBlockSection title="Filters" columns="1">
+                <apex:pageBlockSectionItem>
+                    <apex:outputLabel value="Depot Name:" for="nameFilterInput" />
+                    <apex:input id="nameFilterInput" type="search" value="{!nameFilter}">
+                        <apex:actionSupport event="onchange" action="{!filterDepots}" rerender="depotData" />
+                    </apex:input>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem>
+                    <apex:outputLabel value="Address:" for="locationFilterInput" />
+                    <apex:input id="locationFilterInput" type="search" value="{!locationFilter}">
+                        <apex:actionSupport event="onchange" action="{!filterDepots}" rerender="depotData" />
+                    </apex:input>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <table class="depotEntries">
                 <apex:repeat value="{!depots}" var="depot" first="{!firstIndex}" rows="{!numEntriesPerPage}">
-                    <apex:pageBlockSection id="depotDetails" title="{!depot.Name}">
-                        <table>
-                            <tr>
-                                <td><b>Owned by:</b></td>
-                                <td><apex:outputLabel value="{!depot.Owner__r.Name}" /></td>
-                            </tr>
-                            <tr>
-                                <td><b>Depot Manager:</b></td>
-                                <td><apex:outputLabel value="{!depot.Depot_Manager__c}" /></td>
-                            </tr>
-                            <tr>
-                                <td><b>Address:</b></td>
-                                <td><apex:outputLabel value="{!depot.Address__c}" /></td>
-                            </tr>
-                            <tr>
-                                <td><b>Phone:</b></td>
-                                <td><apex:outputLabel value="{!depot.Primary_Phone__c}" /></td>
-                            </tr>
-                        </table>
-                    </apex:pageBlockSection>
+                    <tr>
+                        <td>
+                            <table class="depotEntry">
+                                <tr>
+                                    <th class="depotDisplayName" colspan="2"><apex:outputLabel value="{!depot.Name}" /></th>
+                                </tr>
+                                <tr>
+                                    <td><b>Owned by:</b></td>
+                                    <td><apex:outputLabel value="{!depot.Owner__r.Name}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Depot Manager:</b></td>
+                                    <td><apex:outputLabel value="{!depot.Depot_Manager__c}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Address:</b></td>
+                                    <td><apex:outputLabel value="{!depot.Address__c}" /></td>
+                                </tr>
+                                <tr>
+                                    <td><b>Phone:</b></td>
+                                    <td><apex:outputLabel value="{!depot.Primary_Phone__c}" /></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </apex:repeat>
-            </div>
+            </table>
             <div class="pageFooter">
                 <apex:outputLabel value="Page Number: " />
                 <apex:selectList value="{!pageNumber}" size="1">
