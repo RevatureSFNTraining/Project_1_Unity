@@ -17,6 +17,9 @@
         .depotEntry td {
             padding: 4px 8px 4px 8px;
         }
+        .depotLink {
+            text-align: center;
+        }
     </style>
     <apex:form >
         <apex:pageBlock title="Company">
@@ -64,6 +67,11 @@
                                 <tr>
                                     <td><b>Phone:</b></td>
                                     <td><apex:outputLabel value="{!depot.Primary_Phone__c}" /></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" class="depotLink">
+                                        <apex:outputLink value="http://google.com/maps/search/{!depot.Address__c}" target="_blank">Find in Google Maps</apex:outputLink>
+                                    </td>
                                 </tr>
                             </table>
                         </td>
