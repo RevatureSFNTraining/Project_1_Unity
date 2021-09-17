@@ -37,9 +37,11 @@ public class DepotController {
     public List<SelectOption> getPageNumbers() {
         List<SelectOption> pages = new List<SelectOption>();
         Integer totalPages = (Integer) Math.ceil((Decimal) depots.size() / MAX_ENTRIES_PER_PAGE);
-        for (Integer i = 1; i <= totalPages; i++) {
+        Integer i = 1;
+        do {
             pages.add(new SelectOption(String.valueOf(i), String.valueOf(i)));
-        }
+            i++;
+        } while (i <= totalPages);
         return pages;
     }
     
