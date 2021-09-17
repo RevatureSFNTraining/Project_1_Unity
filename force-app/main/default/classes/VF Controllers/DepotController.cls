@@ -45,7 +45,7 @@ public class DepotController {
         return pages;
     }
     
-    public PageReference filterDepots() {
+    public void filterDepots() {
         String soqlNameFilter = '%' + nameFilter + '%';
         String soqlLocationFilter = '%' + locationFilter + '%';
 
@@ -54,7 +54,5 @@ public class DepotController {
 
         //Reset page number and filter details after refreshing depot list with new data.
         pageNumber = '1';
-
-        return null;
     }
 }
