@@ -1,4 +1,5 @@
 <apex:page doctype="html-5.0" controller="DepotController">
+    <apex:stylesheet value="{$Resource.style}" />
     <style type="text/css">
         .depotDisplayName {
             font-size: 14pt;
