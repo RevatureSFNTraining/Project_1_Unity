@@ -34,15 +34,21 @@ public class loginController {
     }
     
     public void login() {
+        boolean goodPass = false;
         if (accessLevel.equals('Customer')) {
-            List<Contact> cust = [SELECT Email, Password FROM Contact WHERE Email = :inputEmail AND Password = :inputPass];
+            List<Contact> cust = [SELECT Email, Password__c FROM Contact WHERE Email = :inputEmail];
+            if (cust.size() > 0 && inputPass.equals(Password__c))
+                goodPass = true;
             err = '';
         } else if (accessLevel.equals('Employee')) {
-            List<Employee> emps = [SELECT Email, Password FROM Employee WHERE Email = :inputEmail AND Password = :inputPass];
+            List<Employee> emps = [SELECT Work_Email__c, Password__c FROM Employee__c WHERE Email__c = :inputEmail];
+            if (emps.size() > 0 && inputPass.equals(Password__c))
+                goodPass = true;
             err = '';
         } else {
             err = 'Incorrect username or password.';
         }
+        //if (goodPass && err.equals(''))
         //append identifier to URL and redirect back to previous page
     }
 
