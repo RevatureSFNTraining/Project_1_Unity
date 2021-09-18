@@ -37,12 +37,12 @@ public class loginController {
         boolean goodPass = false;
         if (accessLevel.equals('Customer')) {
             List<Contact> cust = [SELECT Email, Password__c FROM Contact WHERE Email = :inputEmail];
-            if (cust.size() > 0 && inputPass.equals(Password__c))
+            if (cust.size() > 0 && inputPass.equals(cust[0].Password__c))
                 goodPass = true;
             err = '';
         } else if (accessLevel.equals('Employee')) {
-            List<Employee> emps = [SELECT Work_Email__c, Password__c FROM Employee__c WHERE Email__c = :inputEmail];
-            if (emps.size() > 0 && inputPass.equals(Password__c))
+            List<Employee__c> emps = [SELECT Work_Email__c, Password__c FROM Employee__c WHERE Work_Email__c = :inputEmail];
+            if (emps.size() > 0 && inputPass.equals(emps[0].Password__c))
                 goodPass = true;
             err = '';
         } else {

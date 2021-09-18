@@ -14,7 +14,7 @@ public class TransactionController {
             return;
         }
         else{
-        tp = issueDate.daysBetween(expectedReturnDate) * Vehicle__c.Base_Rental_Rate__c;
+        tp = issueDate.daysBetween(expectedReturnDate) * 25.77;
         }
     }
 }
