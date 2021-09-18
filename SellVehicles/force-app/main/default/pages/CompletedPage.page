@@ -1,0 +1,20 @@
+<!-- 
+Name: CompletedPage
+Author: Julia Weakley
+DateCreated: 9/13/2021
+DateModified: 9/17/2021
+Description: 
+-->
+
+<apex:page controller="CarWizardController">
+    <apex:form >
+    <apex:pageBlock title="Thank you">
+    
+        You did it!! Have a nice day.
+        </apex:pageBlock>
+        
+          
+            
+        
+    </apex:form>
+</apex:page>
