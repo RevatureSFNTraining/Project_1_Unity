@@ -28,6 +28,7 @@ Description:
             	border-color: #a20000;
             }
             
+            
         </style>
         <apex:pageBlock title=" Information">
             
@@ -89,6 +90,7 @@ Description:
                 </apex:selectList>
                 <apex:inputField value="{!vec.Odometer_Mileage__c}"/>
                 <apex:inputField value="{!vec.Condition__c}"/>
+                  <apex:inputField value="{!vec.Base_Rental_Rate__c}"/>
                 <apex:inputField value="{!vec.Description__c}"/>
                 <!-- <apex:inputTextarea title="Additional Notes About the car" value=""></apex:inputTextarea> -->
                 
