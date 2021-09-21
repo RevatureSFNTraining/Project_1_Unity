@@ -1,4 +1,4 @@
-<apex:page controller="CarListController" >
+<apex:page controller="CarListController" showHEader="false">
      <apex:form>
         <apex:pageBlock title="Cars For Rent">
             <apex:pageBlockTable value="{!vehicleList}" var="cl">
