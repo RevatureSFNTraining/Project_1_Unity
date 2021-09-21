@@ -1,0 +1,26 @@
+<apex:page controller="landingPageController" action="verifyLocation">
+    <!--<apex:stylesheet value="{$Resource.style}" />-->
+    <apex:form>
+        <apex:pageBlock title="Car Portal">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton action="{!changeLoc}" value = "Change Location"/>
+                <apex:commandButton action="{!carList}" value = "Rental Listings"/>
+                <apex:commandButton action="{!faq}" value = "FAQ/Issues"/>
+                <apex:commandButton action="{!sellCar}" value = "Sell My Car"/>
+            </apex:pageBlockButtons>
+            <!-- Display top 3 most rented cars at current depot-->
+            <apex:outputField value="{!vehicle1.description}"/>
+            <apex:outputField value="{!vehicle1.vehicle_year}"/>
+            <apex:outputField value="{!vehicle1.vehicle_make}"/>
+            <apex:outputField value="{!vehicle1.vehicle_model}"/>
+            <br/>
+            <apex:outputField value="{!year2}"/>
+            <apex:outputField value="{!make2}"/>
+            <apex:outputField value="{!model2}"/>
+            <br/>
+            <apex:outputField value="{!year3}"/>
+            <apex:outputField value="{!make3}"/>
+            <apex:outputField value="{!model3}"/>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
