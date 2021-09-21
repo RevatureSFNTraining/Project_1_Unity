@@ -9,6 +9,7 @@
         Expected Return Date: <apex:input type="date" value="{!expectedReturnDate}">
         <apex:actionSupport event="onchange" action="{!totalPrice}" rerender="newPrice"/>
         </apex:input><br/>
-        Total Price: <apex:outputLabel value="{!tp}"/>
+        Total Price: <apex:outputLabel value="{!tp}"/> <br/>
+        <apex:commanButton value="Rent" action="{!saveRecord}"/>
     </apex:form>
 </apex:page>
