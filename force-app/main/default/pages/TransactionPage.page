@@ -1,11 +1,15 @@
-<apex:page docType="html-5.0" controller="ExampleController">
+<apex:page docType="html-5.0" controller="TransactionController" showHeader="False">
     <apex:form id="newPrice">
+        <apex:selectList multiselect="false" size="1" value="{!selectedId}">
+			<apex:selectOptions value="{!carNames}">
+		</apex:selectOptions> <br/>
         Issue Date: <apex:input type="date" value="{!issueDate}">
         <apex:actionSupport event="onchange" action="{!totalPrice}" rerender="newPrice"/>
         </apex:input><br/>
         Expected Return Date: <apex:input type="date" value="{!expectedReturnDate}">
         <apex:actionSupport event="onchange" action="{!totalPrice}" rerender="newPrice"/>
         </apex:input><br/>
-        Total Price: <apex:outputLabel value="{!tp}"/>
+        Total Price: <apex:outputLabel value="{!tp}"/> <br/>
+        <apex:commanButton value="Rent" action="{!saveRecord}"/>
     </apex:form>
 </apex:page>

@@ -14,13 +14,15 @@
             <apex:outputField value="{!vehicle1.vehicle_make}"/>
             <apex:outputField value="{!vehicle1.vehicle_model}"/>
             <br/>
-            <apex:outputField value="{!year2}"/>
-            <apex:outputField value="{!make2}"/>
-            <apex:outputField value="{!model2}"/>
+            <apex:outputField value="{!vehicle2.description}"/>
+            <apex:outputField value="{!vehicle2.vehicle_year}"/>
+            <apex:outputField value="{!vehicle2.vehicle_make}"/>
+            <apex:outputField value="{!vehicle2.vehicle_model}"/>
             <br/>
-            <apex:outputField value="{!year3}"/>
-            <apex:outputField value="{!make3}"/>
-            <apex:outputField value="{!model3}"/>
+            <apex:outputField value="{!vehicle3.description}"/>
+            <apex:outputField value="{!vehicle3.vehicle_year}"/>
+            <apex:outputField value="{!vehicle3.vehicle_make}"/>
+            <apex:outputField value="{!vehicle3.vehicle_model}"/>
         </apex:pageBlock>
     </apex:form>
 </apex:page>
