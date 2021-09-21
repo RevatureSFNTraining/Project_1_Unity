@@ -40,11 +40,12 @@ Description:
                 <apex:inputField value="{!vec.Vehicle_Model__c}" />
                 <apex:inputField value="{!vec.Vehicle_Year__c}" />
                 <apex:selectList multiselect="false" value="{!vec.Manufacturer__c}" size="1">
-                    <apex:selectOptions value="{!ManufacturerOptions}" rendered="true">
-                    </apex:selectOptions>
+                  <apex:selectOptions value="{!ManufacturerOptions}" rendered="true">
+                  </apex:selectOptions>
                 </apex:selectList>
                 <apex:inputField value="{!vec.Odometer_Mileage__c}"/>
                 <apex:inputField value="{!vec.Condition__c}"/>
+                 <apex:inputField value="{!vec.Base_Rental_Rate__c}"/>
                 <apex:inputField value="{!vec.Description__c}"/>
                 <!-- <apex:inputTextarea title="Additional Notes About the car" value=""></apex:inputTextarea> -->
                 
