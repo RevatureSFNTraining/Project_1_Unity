@@ -7,6 +7,7 @@ public class DepotController {
     
     public String accountId {get; set;}
     public String pageNumber {get; set;}
+    public String selectedDepotId {get; set;}
 
     public String nameFilter {get; set;}
     public String locationFilter {get; set;}
@@ -54,5 +55,17 @@ public class DepotController {
 
         //Reset page number and filter details after refreshing depot list with new data.
         pageNumber = '1';
+    }
+
+    public void resetFilters() {
+        nameFilter = '';
+        locationFilter = '';
+        filterDepots();
+    }
+
+    public PageReference selectDepot() {
+        PageReference pf = new PageReference('LandingPage');
+        pf.getParameters().put('depot_id', selectedDepotId);
+        return pf;
     }
 }
