@@ -102,9 +102,15 @@
                         <apex:actionSupport event="onchange" rerender="depotData" />
                     </apex:selectList>
                 </div>
+                <div>
+                    Selected Depot:
+                    <apex:selectList value="{!selectedDepotId}" size="1">
+                        <apex:selectOptions value="{!depotItems}" />
+                    </apex:selectList>
+                </div>
             </apex:pageBlock>
-            <apex:pageBlock id="selectedDepotFooter" title="{!">
-
+            <apex:pageBlock id="selectedDepotFooter" title="Selected Depot: {!selectedDepotId}">
+                <apex:commandButton action="{!selectDepot}" value="Make this my Depot" />
             </apex:pageBlock>
         </apex:form>
     </div>

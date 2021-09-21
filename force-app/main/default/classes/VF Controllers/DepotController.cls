@@ -27,6 +27,18 @@ public class DepotController {
         return items;
     }
     
+    public List<SelectOption> getDepotItems() {
+        List<SelectOption> items = new List<SelectOption>();
+        for (Depot__c depot : depots) {
+            items.add(new SelectOption(depot.Id, depot.Name));
+        }
+        if (items.size() > 0)
+            selectedDepotId = items[0].getValue();
+        else
+            selectedDepotId = null;
+        return items;
+    }
+    
     public Integer getFirstIndex() {
         return (Integer.valueOf(pageNumber) - 1) * MAX_ENTRIES_PER_PAGE;
     }
@@ -64,7 +76,7 @@ public class DepotController {
     }
 
     public PageReference selectDepot() {
-        PageReference pf = new PageReference('LandingPage');
+        PageReference pf = new PageReference('/apex/LandingPage');
         pf.getParameters().put('depot_id', selectedDepotId);
         return pf;
     }
