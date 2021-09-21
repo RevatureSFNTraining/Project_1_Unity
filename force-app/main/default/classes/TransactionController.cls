@@ -24,7 +24,7 @@ public class TransactionController {
         Rental_Contract__c newRental = new Rental_Contract__c();
         newRental.Issue_Date__c = issueDate;
         newRental.Expected_Return_Date__c = expectedReturnDate;
-        newRental.Customer__c = customer;
+        newRental.Customer__c = customer.Id;
         newRental.Status__c = 'Active';
         newRental.Vehicle__c = selectedId;
         List<Vehicle__c> vehicleDepot = [SELECT id, stationed_Depot__c FROM Vehicle__c WHERE id =: selectedId]; 
