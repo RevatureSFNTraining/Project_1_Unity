@@ -1,4 +1,4 @@
-<apex:page controller="landingPageController" action="verifyLocation">
+<apex:page controller="landingPageController" action="{!verifyLocation}" showHeader="false">
     <!--<apex:stylesheet value="{$Resource.style}" />-->
     <apex:form>
         <apex:pageBlock title="Car Portal">
@@ -9,20 +9,20 @@
                 <apex:commandButton action="{!sellCar}" value = "Sell My Car"/>
             </apex:pageBlockButtons>
             <!-- Display top 3 most rented cars at current depot-->
-            <apex:outputField value="{!vehicle1.description}"/>
-            <apex:outputField value="{!vehicle1.vehicle_year}"/>
-            <apex:outputField value="{!vehicle1.vehicle_make}"/>
-            <apex:outputField value="{!vehicle1.vehicle_model}"/>
+            <apex:outputField value="{!vehicle1.description__c}"/>
+            <apex:outputField value="{!vehicle1.vehicle_year__c}"/>
+            <apex:outputField value="{!vehicle1.vehicle_make__c}"/>
+            <apex:outputField value="{!vehicle1.vehicle_model__c}"/>
             <br/>
-            <apex:outputField value="{!vehicle2.description}"/>
-            <apex:outputField value="{!vehicle2.vehicle_year}"/>
-            <apex:outputField value="{!vehicle2.vehicle_make}"/>
-            <apex:outputField value="{!vehicle2.vehicle_model}"/>
+            <apex:outputField value="{!vehicle2.description__c}"/>
+            <apex:outputField value="{!vehicle2.vehicle_year__c}"/>
+            <apex:outputField value="{!vehicle2.vehicle_make__c}"/>
+            <apex:outputField value="{!vehicle2.vehicle_model__c}"/>
             <br/>
-            <apex:outputField value="{!vehicle3.description}"/>
-            <apex:outputField value="{!vehicle3.vehicle_year}"/>
-            <apex:outputField value="{!vehicle3.vehicle_make}"/>
-            <apex:outputField value="{!vehicle3.vehicle_model}"/>
+            <apex:outputField value="{!vehicle3.description__c}"/>
+            <apex:outputField value="{!vehicle3.vehicle_year__c}"/>
+            <apex:outputField value="{!vehicle3.vehicle_make__c}"/>
+            <apex:outputField value="{!vehicle3.vehicle_model__c}"/>
         </apex:pageBlock>
     </apex:form>
 </apex:page>
