@@ -2,7 +2,8 @@
     <apex:form id="newPrice">
         <apex:selectList multiselect="false" size="1" value="{!selectedId}">
 			<apex:selectOptions value="{!carNames}">
-		</apex:selectOptions> <br/>
+		    </apex:selectOptions> 
+        </apex:selectList> <br/>
         Issue Date: <apex:input type="date" value="{!issueDate}">
         <apex:actionSupport event="onchange" action="{!totalPrice}" rerender="newPrice"/>
         </apex:input><br/>

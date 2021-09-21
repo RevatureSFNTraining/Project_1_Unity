@@ -19,7 +19,7 @@ public class CarWizardController
         tran = new Purchase_Transaction__c(); 
      } // end of CarWizardController
     
-    // first page of wizard
+    // brings user back to first page of wizard
     public PageReference start()
     {
         Vehicle__c anewv = new Vehicle__c(); 
@@ -33,7 +33,19 @@ public class CarWizardController
     // send user to page for filling out Company Information
     public PageReference sellerInfo()
     {
-        return page.SellerInformation; 
+        
+        PageReference pageRef = page.SellerInformation; 
+        String param = pageref.getParameters().get('depotId');
+        
+        if(!String.isEmpty(param))
+        {
+             pageref.getParameters().put('depotId',param);
+        	return pageRef; 
+        }// end of if 
+        pageRef.setRedirect(true);
+        pageref.getParameters().put('depotId','');
+        
+        return pageRef; 
     }// end of sellerInfo
     
     
@@ -58,7 +70,10 @@ public class CarWizardController
       
         vec.Purchase_Transaction__c = tran.Id; 
         
+        vec.Stationed_Depot__c = tran.Depot__c; 
+        
         insert vec;
+        
         
          return Page.CompletedPage; 
     } // end of saveVehicle()
@@ -76,28 +91,35 @@ public class CarWizardController
         }
          vec.Purchase_Transaction__c = tran.Id; 
         
-        insert vec;
+        vec.Stationed_Depot__c = tran.Depot__c; 
         
-         return Page.CompletedPage; 
+        insert vec;
+
+        PageReference pageRef = Page.CompletedPage;
+        pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id', tran.Depot__c); 
+        
+         return pageRef; 
     }
     
     public PageReference addAnotherVehicle()
     {
-      
+        
        List<Purchase_Transaction__c> tranList = [SELECT ID FROM Purchase_Transaction__c where id =: tran.id];
       	if(tranList.size() == 0)
         {
         	tran.Purchase_Date__c = System.today();
        		insert tran;
-        }
-        
+        } // end of if
       
         vec.Purchase_Transaction__c = tran.Id; 
+        vec.Stationed_Depot__c = tran.Depot__c; 
         
         insert vec;
         
         Vehicle__c anotherv = new Vehicle__c(); 
         vec.id = anotherv.id; 
+        
         
         return page.AdditionalVehicle; 
     }
@@ -160,7 +182,38 @@ public class CarWizardController
          
      } // end of getauthUsers
     */
-   
+    
+    // Alex's code for Project
+    public PageReference changeLoc() {
+        PageReference pageRef = new PageReference('/apex/locations');
+        pageRef.setRedirect(true);
+        return pageRef;
+    }
+    
+    //redirect to carList page for rental process
+    public PageReference carList() {
+        PageReference pageRef = new PageReference('/apex/carlist');
+        pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
+        return pageRef;
+    }
+    
+    //redirect to faq page
+    public PageReference faq() {
+        PageReference pageRef = new PageReference('/apex/casepage');
+        pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
+        return pageRef;
+    }
+    
+    //redirect to sell car page
+    public PageReference sellCar() {
+        PageReference pageRef = new PageReference('/apex/sellacar');
+        pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
+        return pageRef;
+    }
+
     
     
     

@@ -1,4 +1,4 @@
-<apex:page controller="landingPageController" action="{!verifyLocation}">
+<apex:page controller="landingPageController" action="{!verifyLocation}" showHeader="false">
     <!--<apex:stylesheet value="{$Resource.style}" />-->
     <apex:form>
         <apex:pageBlock title="Car Portal">
