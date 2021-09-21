@@ -1,6 +1,15 @@
 <apex:page standardController="Case" extensions="CaseController" showHeader="false" title="FAQ">
     <apex:pageBlock>
-
+        <apex:form>
+            <apex:pageBlock>
+                <apex:pageBlockButtons location="top">
+                    <apex:commandButton action="{!changeLoc}" value="Change Location" />
+                    <apex:commandButton action="{!carList}" value="Rental Listings" />
+                    <apex:commandButton action="{!faq}" value="FAQ/Issues" />
+                    <apex:commandButton action="{!sellCar}" value="Sell My Car" />
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+        </apex:form>
         <link REL="SHORTCUT ICON" HREF="{!URLFOR($Resource.favicon)}" />
         <style type="text/css">
             .bPageBlock .detailList .dataCol {
@@ -25,7 +34,6 @@
                 padding-left: 0;
             }
         </style>
-
         <div style="font-size:16px">
             <apex:pageBlockSection title="Requirements for Renting">
                 <b><span style="font-size:12pt;">Age Requirements</span></b><br />
@@ -49,10 +57,18 @@
             </apex:pageBlockSection>
         </div>
         <div style="font-size:16px">
-            <apex:pageBlockSection title="Locations">
+            <apex:pageBlockSection title="Locations" columns="1">
                 <b><span style="font-size:12pt;">Locations</span></b><br />
                 Where can I find the locations?<br />
-                <font color="grey">The locations can be viewed here:</font>
+                <table>
+                    <tr>
+                        <font color="grey">The locations can be viewed here:
+                            <apex:outputLink value="https://carrentalportal1-developer-edition.na163.force.com/"
+                                id="theLink">Depot Locations</apex:outputLink>
+                        </font>
+                    </tr>
+                </table>
+
             </apex:pageBlockSection>
         </div>
         <div style="font-size:16px">
@@ -156,7 +172,9 @@
                     </apex:form>
 
                 </apex:pageBlockSection>
+
             </div>
+
         </apex:pageBlock>
 
     </apex:pageBlock>
@@ -164,5 +182,3 @@
 
 
 </apex:page>
-
-//comment
