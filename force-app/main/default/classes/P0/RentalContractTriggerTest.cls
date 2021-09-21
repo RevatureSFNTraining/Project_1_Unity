@@ -23,7 +23,7 @@ private class RentalContractTriggerTest {
             //Attempt to create a new contract with an existing overdue contract. We will need to fetch a standby vehicle and depot first.
             Vehicle__c readyVehicle = [SELECT Id FROM Vehicle__c WHERE Status__c = 'Checked In' LIMIT 1];
             Depot__c someDepot = [SELECT Id FROM Depot__c LIMIT 1];
-            Rental_Contract__c newContract = new Rental_Contract__c(Name = 'New Contract', Company__c = rentalContract.Company__c, Customer__c = rentalContract.Customer__c, Vehicle__c = readyVehicle.Id, Issuing_Depot__c = someDepot.Id, Expected_Return_Date__c = Date.today().addDays(1));
+            Rental_Contract__c newContract = new Rental_Contract__c(Company__c = rentalContract.Company__c, Customer__c = rentalContract.Customer__c, Vehicle__c = readyVehicle.Id, Issuing_Depot__c = someDepot.Id, Expected_Return_Date__c = Date.today().addDays(1));
             insert newContract;
 
             System.assert(false, 'Was able to create a new contract for a customer with an overdue contract somehow');
@@ -45,7 +45,7 @@ private class RentalContractTriggerTest {
             Contact randomCustomer = customers[(integer) (Math.random() * customers.size())];
             Depot__c randomDepot = depots[(integer) (Math.random() * depots.size())];
 
-            newContracts.add(new Rental_Contract__c(Name = 'New Contract ' + vehicle.Name, Company__c = acc.Id, Customer__c = randomCustomer.Id, Vehicle__c = vehicle.Id, Issuing_Depot__c = randomDepot.Id, Expected_Return_Date__c = Date.today().addDays(3)));
+            newContracts.add(new Rental_Contract__c(Company__c = acc.Id, Customer__c = randomCustomer.Id, Vehicle__c = vehicle.Id, Issuing_Depot__c = randomDepot.Id, Expected_Return_Date__c = Date.today().addDays(3)));
         }
         insert newContracts;
 
@@ -57,7 +57,7 @@ private class RentalContractTriggerTest {
         try {
             Map<string, sObject> requiredFields = getRequiredInstances(true);
 
-            Rental_Contract__c newContract = new Rental_Contract__c(Name = 'Test Contract', Company__c = requiredFields.get('Account').Id, Customer__c = requiredFields.get('Customer').Id, Vehicle__c = requiredFields.get('Vehicle').Id, Issuing_Depot__c = requiredFields.get('Depot').Id, Expected_Return_Date__c = Date.today().addDays(3));
+            Rental_Contract__c newContract = new Rental_Contract__c(Company__c = requiredFields.get('Account').Id, Customer__c = requiredFields.get('Customer').Id, Vehicle__c = requiredFields.get('Vehicle').Id, Issuing_Depot__c = requiredFields.get('Depot').Id, Expected_Return_Date__c = Date.today().addDays(3));
             insert newContract;
 
             System.assert(false, 'Was somehow able to form a contract for a vehicle that was already checked out...');
@@ -71,7 +71,7 @@ private class RentalContractTriggerTest {
         try {
             Map<string, sObject> requiredFields = getRequiredInstances(false);
 
-            Rental_Contract__c newContract = new Rental_Contract__c(Name = 'Test Contract', Company__c = requiredFields.get('Account').Id, Customer__c = requiredFields.get('Customer').Id, Vehicle__c = requiredFields.get('Vehicle').Id, Issuing_Depot__c = requiredFields.get('Depot').Id, Issue_Date__c = Date.today().addDays(1), Expected_Return_Date__c = Date.today().addDays(3));
+            Rental_Contract__c newContract = new Rental_Contract__c(Company__c = requiredFields.get('Account').Id, Customer__c = requiredFields.get('Customer').Id, Vehicle__c = requiredFields.get('Vehicle').Id, Issuing_Depot__c = requiredFields.get('Depot').Id, Issue_Date__c = Date.today().addDays(1), Expected_Return_Date__c = Date.today().addDays(3));
 
             insert newContract;
 
@@ -86,7 +86,7 @@ private class RentalContractTriggerTest {
         try {
             Map<string, sObject> requiredFields = getRequiredInstances(false);
 
-            Rental_Contract__c newContract = new Rental_Contract__c(Name = 'Test Contract', Company__c = requiredFields.get('Account').Id, Customer__c = requiredFields.get('Customer').Id, Vehicle__c = requiredFields.get('Vehicle').Id, Issuing_Depot__c = requiredFields.get('Depot').Id, Expected_Return_Date__c = Date.today().addDays(-1));
+            Rental_Contract__c newContract = new Rental_Contract__c(Company__c = requiredFields.get('Account').Id, Customer__c = requiredFields.get('Customer').Id, Vehicle__c = requiredFields.get('Vehicle').Id, Issuing_Depot__c = requiredFields.get('Depot').Id, Expected_Return_Date__c = Date.today().addDays(-1));
 
             insert newContract;
 

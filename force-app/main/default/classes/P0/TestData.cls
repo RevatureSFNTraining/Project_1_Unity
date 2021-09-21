@@ -46,7 +46,7 @@ public class TestData {
         List<Depot__c> depots = [SELECT Id FROM Depot__c];
 
         //Rental Contract
-        Rental_Contract__c testContract = new Rental_Contract__c(Name = 'abc123', Company__c = acc.Id, Customer__c = customers[0].Id, Vehicle__c = vehicles[0].Id, Issuing_Depot__c = depots[0].Id, Expected_Return_Date__c = Date.today().addDays(7));
+        Rental_Contract__c testContract = new Rental_Contract__c(Company__c = acc.Id, Customer__c = customers[0].Id, Vehicle__c = vehicles[0].Id, Issuing_Depot__c = depots[0].Id, Expected_Return_Date__c = Date.today().addDays(7));
 
         insert testContract;
     }
