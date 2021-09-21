@@ -36,11 +36,7 @@ public class CarWizardController
         return page.SellerInformation; 
     }// end of sellerInfo
     
-    // send user to page for filling out Vehicle Information
-    public PageReference vehicleInfo()
-    {
-        return page.VehicleInformation; 
-    }// end of vehicleInfo()
+    
     
     // send user back to page for filling out company information
     public PageReference backToYourInfo()
