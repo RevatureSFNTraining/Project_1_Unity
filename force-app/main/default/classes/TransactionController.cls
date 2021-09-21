@@ -16,12 +16,7 @@ public class TransactionController {
             return;
         }
         else{
-<<<<<<< HEAD
         tp = issueDate.daysBetween(expectedReturnDate) * 25.77;
-=======
-            List<Vehicle__c> vehicleRate = [SELECT Base_Rental_Rate__c FROM Vehicle__c WHERE id =: selectedId];
-            tp = issueDate.daysBetween(expectedReturnDate) * vehicleRate[0].Base_Rental_Rate__c;
->>>>>>> main
         }
     }
     public PageReference saveRecord() {

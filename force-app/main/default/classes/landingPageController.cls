@@ -6,8 +6,8 @@ public class landingPageController {
     //public controller to grab top 3 rented cars currently
     public landingPageController() {
         String depot = System.currentPageReference().getParameters().get('depot_id');
-        List<Vehicle__c> vehicleInfo = [SELECT Id, Vehicle_make__c, Vehicle_model__c, Vehicle_year__c, Description__c, Stationed_depot__c FROM Vehicle WHERE Stationed_depot__c = :depot];
-        List<RentalContract__c> contracts = [SELECT Id, Vehicle__c, Issuing_depot__c FROM Rental_Contract__c WHERE Issuing_depot__c = :depot];
+        List<Vehicle__c> vehicleInfo = [SELECT Id, Vehicle_make__c, Vehicle_model__c, Vehicle_year__c, Description__c, Stationed_depot__c FROM Vehicle__c WHERE Stationed_depot__c = :depot];
+        List<Rental_Contract__c> contracts = [SELECT Id, Vehicle__c, Issuing_depot__c FROM Rental_Contract__c WHERE Issuing_depot__c = :depot];
         Map<String, Integer> numOfContracts = new Map<String, Integer>();
         integer most = 0;
         integer most2 = 0;
