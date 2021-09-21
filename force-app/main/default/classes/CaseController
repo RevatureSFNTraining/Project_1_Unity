@@ -24,6 +24,34 @@ public class CaseController {
         return null;
     }
     
+       public PageReference changeLoc() {
+        PageReference pageRef = new PageReference('/apex/locations');
+        pageRef.setRedirect(true);
+        return pageRef;
+    }
+    
+    //redirect to carList page for rental process
+    public PageReference carList() {
+        PageReference pageRef = new PageReference('/apex/carlist');
+        pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
+        return pageRef;
+    }
+    
+    //redirect to faq page
+    public PageReference faq() {
+        PageReference pageRef = new PageReference('/apex/casepage');
+        pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
+        return pageRef;
+    }
+    
+    //redirect to sell car page
+    public PageReference sellCar() {
+        PageReference pageRef = new PageReference('/apex/sellacar');
+        pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
+        return pageRef;
+    }
+    
 }
-
-//comment

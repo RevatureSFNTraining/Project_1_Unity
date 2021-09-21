@@ -11,6 +11,6 @@
         <apex:actionSupport event="onchange" action="{!totalPrice}" rerender="newPrice"/>
         </apex:input><br/>
         Total Price: <apex:outputLabel value="{!tp}"/> <br/>
-        <apex:commanButton value="Rent" action="{!saveRecord}"/>
+        <apex:commandButton value="Rent" action="{!saveRecord}"/>
     </apex:form>
 </apex:page>
