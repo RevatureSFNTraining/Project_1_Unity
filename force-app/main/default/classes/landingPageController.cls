@@ -7,7 +7,7 @@ public class landingPageController {
     public landingPageController() {
         String depot = System.currentPageReference().getParameters().get('depot_id');
         List<Vehicle__c> vehicleInfo = [SELECT Id, Vehicle_make__c, Vehicle_model__c, Vehicle_year__c, Description__c, Stationed_depot__c FROM Vehicle WHERE Stationed_depot__c = :depot];
-        List<RentalContract__c> contracts = [SELECT Id, Vehicle__c, Issuing_depot__c FROM RentalContract__c WHERE Issuing_depot__c = :depot];
+        List<RentalContract__c> contracts = [SELECT Id, Vehicle__c, Issuing_depot__c FROM Rental_Contract__c WHERE Issuing_depot__c = :depot];
         Map<String, Integer> numOfContracts = new Map<String, Integer>();
         integer most = 0;
         integer most2 = 0;
@@ -21,22 +21,22 @@ public class landingPageController {
         }
         for(Integer a = 0; a < vehicleInfo.size(); a++) {
             Integer num = numofContracts.get(vehicleInfo[a].Id);
-            String vId = vehicleInfo[a].Id;
+            Vehicle__c v = vehicleInfo[a];
             if (num > most) {
                 most3 = most2;
                 most2 = most;
                 most = num;
                 vehicle3 = vehicle2;
                 vehicle2 = vehicle1;
-                vehicle1 = vId;
+                vehicle1 = v;
             } else if (num > most2) {
                 most3 = most2;
                 most2 = num;
                 vehicle3 = vehicle2;
-                vehicle2 = vId;
+                vehicle2 = v;
             } else if(num > most3) {
                 most3 = num;
-                vehicle3 = vId;
+                vehicle3 = v;
             }
         }
     }
@@ -63,6 +63,7 @@ public class landingPageController {
     public PageReference carList() {
         PageReference pageRef = new PageReference('/apex/carlist');
         pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
         return pageRef;
     }
     
@@ -70,6 +71,7 @@ public class landingPageController {
     public PageReference faq() {
         PageReference pageRef = new PageReference('/apex/casepage');
         pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
         return pageRef;
     }
     
@@ -77,6 +79,7 @@ public class landingPageController {
     public PageReference sellCar() {
         PageReference pageRef = new PageReference('/apex/sellacar');
         pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
         return pageRef;
     }
 }
