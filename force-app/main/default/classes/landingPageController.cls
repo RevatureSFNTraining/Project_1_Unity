@@ -63,6 +63,7 @@ public class landingPageController {
     public PageReference carList() {
         PageReference pageRef = new PageReference('/apex/carlist');
         pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
         return pageRef;
     }
     
@@ -70,6 +71,7 @@ public class landingPageController {
     public PageReference faq() {
         PageReference pageRef = new PageReference('/apex/casepage');
         pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
         return pageRef;
     }
     
@@ -77,6 +79,7 @@ public class landingPageController {
     public PageReference sellCar() {
         PageReference pageRef = new PageReference('/apex/sellacar');
         pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
         return pageRef;
     }
 }
