@@ -4,7 +4,10 @@
 			<apex:selectOptions value="{!carNames}">
 		    </apex:selectOptions> 
         </apex:selectList> <br/>
+        First Name: <apex:input type="text" value="{!firstName}"/> 
+        Last Name: <apex:input type="text" value="{!lastName}"/> 
         Birthday: <apex:input type="date" value="{!birthdayDate}"/> <br/>
+        Email: <apex:input type="email" value="{!email}"/> <br/>
         Issue Date: <apex:input type="date" value="{!issueDate}">
         <apex:actionSupport event="onchange" action="{!totalPrice}" rerender="newPrice"/>
         </apex:input><br/>
