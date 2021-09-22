@@ -42,11 +42,11 @@ public class landingPageController {
                 }
             }
             top3cars = '';
-            if (!vehicle1.Vehicle_year__c.equals(null)) {
+            if (!vehicle1.Vehicle_year__c == null) {
                 top3cars += '1. ' + vehicle1.Vehicle_year__c + ' ' + vehicle1.Vehicle_make__c + ' ' + vehicle1.Vehicle_model__c + '\n';
-            } if (!vehicle2.Vehicle_year__c.equals(null)) {
+            } if (!vehicle2.Vehicle_year__c == null) {
                 top3cars += '2. ' + vehicle2.Vehicle_year__c + ' ' + vehicle2.Vehicle_make__c + ' ' + vehicle2.Vehicle_model__c + '\n';
-            } if (!vehicle1.Vehicle_year__c.equals(null)) {
+            } if (!vehicle1.Vehicle_year__c == null) {
                 top3cars += '3. ' + vehicle3.Vehicle_year__c + ' ' + vehicle3.Vehicle_make__c + ' ' + vehicle3.Vehicle_model__c;
             }
         }
