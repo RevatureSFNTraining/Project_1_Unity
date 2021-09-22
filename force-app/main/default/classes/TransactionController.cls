@@ -2,8 +2,11 @@ public class TransactionController {
     public Date issueDate{get;set;}
     public Date expectedReturnDate{get;set;}
     public decimal tp{get;set;}
-    public string selectedId{get;set;}
+    public String selectedId{get;set;}
     public Date birthdayDate{get;set;}
+    public String email{get;set;}
+    public String firstName{get;set;}
+    public String lastName{get;set}
     List<selectOption> vehicleOptions = new List<selectOption>();
     public List<selectOption> getCarNames() {
         for(Vehicle__c vn : [SELECT Name FROM Vehicle__c WHERE Status__c != 'Lost/Stolen' OR Status__c != 'Decomissioned']) {
@@ -20,12 +23,17 @@ public class TransactionController {
         }
     }
     public PageReference saveRecord() {
-        Contact customer = new Contact(FirstName = UserInfo.getFirstName(), LastName=UserInfo.getLastName(), Birthdate = birthdayDate);
-        insert customer;
         Rental_Contract__c newRental = new Rental_Contract__c();
+        List<Contact> existingContacts = [SELECT id, email FROM Contact WHERE Email = :email];
+        if(existingContacts.size() == 0) {
+            Contact customer = new Contact(FirstName = firstName, LastName= lastName, Birthdate = birthdayDate, Email = email);
+            insert customer;
+            newRental.Customer__c = customer.Id;
+        } else {
+            newRental.Customer__c = existingContacts[0].id;
+        }
         newRental.Issue_Date__c = issueDate;
-        newRental.Expected_Return_Date__c = expectedReturnDate;
-        newRental.Customer__c = customer.Id;
+        newRental.Expected_Return_Date__c = expectedReturnDate; 
         newRental.Status__c = 'Active';
         newRental.Vehicle__c = selectedId;
         List<Vehicle__c> vehicleDepot = [SELECT id, stationed_Depot__c FROM Vehicle__c WHERE id =: selectedId]; 
