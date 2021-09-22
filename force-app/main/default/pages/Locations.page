@@ -27,6 +27,9 @@
         #apexBody {
             margin: 0 25% 0 25%;
         }
+        #companyBlock {
+            text-align: center;
+        }
         #depotEntries {
             display: grid;
             grid-template-columns: 50% 50%;
@@ -34,6 +37,7 @@
         }
         #pageFooter {
             padding: 0 auto 0 auto;
+            text-align: center;
         }
     </style>
     <div id="header">
@@ -45,11 +49,13 @@
                 <apex:outputText value="Welcome to Car Rental Portal. We are excited to see you here. Please select a rental company and one of its depots before renting out a vehicle." />
             </apex:pageBlock>
             <apex:pageBlock title="Company">
-                <apex:outputLabel value="Select your company: " />
-                <apex:selectList value="{!accountId}" size="1">
-                    <apex:selectOptions value="{!accountItems}" />
-                    <apex:actionSupport event="onchange" action="{!filterDepots}" rerender="depotData" />
-                </apex:selectList>
+                <div id="companyBlock">
+                    <apex:outputLabel value="Select your company: " />
+                    <apex:selectList value="{!accountId}" size="1">
+                        <apex:selectOptions value="{!accountItems}" />
+                        <apex:actionSupport event="onchange" action="{!filterDepots}" rerender="depotData" />
+                    </apex:selectList>
+                </div>
             </apex:pageBlock>
             <apex:pageBlock id="depotData" title="Depots">
                 <apex:pageBlockSection title="Filters" columns="1">
