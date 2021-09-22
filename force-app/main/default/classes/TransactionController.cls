@@ -3,6 +3,7 @@ public class TransactionController {
     public Date expectedReturnDate{get;set;}
     public decimal tp{get;set;}
     public string selectedId{get;set;}
+    public Date birthdayDate{get;set;}
     List<selectOption> vehicleOptions = new List<selectOption>();
     public List<selectOption> getCarNames() {
         for(Vehicle__c vn : [SELECT Name FROM Vehicle__c WHERE Status__c != 'Lost/Stolen' OR Status__c != 'Decomissioned']) {
@@ -20,7 +21,7 @@ public class TransactionController {
         }
     }
     public PageReference saveRecord() {
-        Contact customer = new Contact(FirstName = UserInfo.getFirstName(), LastName=UserInfo.getLastName());
+        Contact customer = new Contact(FirstName = UserInfo.getFirstName(), LastName=UserInfo.getLastName(), Birthdate = birthdayDate);
         insert customer;
         Rental_Contract__c newRental = new Rental_Contract__c();
         newRental.Issue_Date__c = issueDate;
