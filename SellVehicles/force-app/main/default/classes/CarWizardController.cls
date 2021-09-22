@@ -2,9 +2,9 @@
 *Name: CarWizardController
 *Author: Julia Weakley
 *DateCreated: 9/13/2021
-*DateModified: 9/21/2021
+*DateModified: 9/17/2021
 *Description: 
-*	
+*	Controller for wizard
 */
 
 
@@ -22,7 +22,7 @@ public class CarWizardController
         tran = new Purchase_Transaction__c(); 
         // depot
         dep = new Depot__c(); 
-     } // end of CarWizardController
+    } // end of CarWizardController
     
     // brings user back to first page of wizard
     public PageReference start()
@@ -53,128 +53,124 @@ public class CarWizardController
         // grab depot id
         String param = System.currentPageReference().getParameters().get('depot_id');
         PageReference pageRef = page.SellerInformation; 
-       	pageRef.setRedirect(true);
+        pageRef.setRedirect(true);
         
         // if id is there set transaction depot to the one saved in the url
         if(!String.isEmpty(param))
         {
-             pageref.getParameters().put('depotId',param);
-             dep.Id = param; 
-             tran.Depot__c = dep.id; 
-        	return pageRef; 
+            pageref.getParameters().put('depotId',param);
+            dep.Id = param; 
+            tran.Depot__c = dep.id; 
+            return pageRef; 
         }// end of if 
-       
+        
         // placed depot id in next url 
         pageref.getParameters().put('depot_id',''); 
         
         return pageRef; 
     }// end of sellerInfo
     
-   
+    
     // send user to transaction completed page
     public PageReference saveVehicle()
     {
-       // insert purchase transaction if it does not exist already
+        // insert purchase transaction if it does not exist already
         List<Purchase_Transaction__c> tranList = [SELECT ID FROM Purchase_Transaction__c where id =: tran.id];
-      	if(tranList.size() == 0)
+        if(tranList.size() == 0)
         {
-        	tran.Purchase_Date__c = System.today();
-       		insert tran;
+            tran.Purchase_Date__c = System.today();
+            insert tran;
         } // end of if
-      
+        
         // make sure vehicle is in same transaction and same depot
         vec.Purchase_Transaction__c = tran.Id; 
         vec.Stationed_Depot__c = tran.Depot__c; 
         
         // save new vehicle 
         insert vec;
-      
+        
         // place depot id in url 
         PageReference pageRef = Page.CompletedPage;
         pageRef.setRedirect(true);
         pageRef.getParameters().put('depot_id', tran.Depot__c);
-      
+        
         return pageRef; 
     } // end of saveVehicle()
     
     
-   
-   
     public PageReference addAnotherVehicle()
     {
-       
         
-       List<Purchase_Transaction__c> tranList = [SELECT ID FROM Purchase_Transaction__c where id =: tran.id];
-      	if(tranList.size() == 0)
+        
+        List<Purchase_Transaction__c> tranList = [SELECT ID FROM Purchase_Transaction__c where id =: tran.id];
+        if(tranList.size() == 0)
         {
-        	tran.Purchase_Date__c = System.today();
-       		insert tran;
+            tran.Purchase_Date__c = System.today();
+            insert tran;
         } // end of if
-      
+        
         vec.Purchase_Transaction__c = tran.Id; 
         vec.Stationed_Depot__c = tran.Depot__c; 
         
-        // add new vehicle to transaction
+        
         insert vec;
         
         Vehicle__c anotherv = new Vehicle__c(); 
         vec.id = anotherv.id;
-
+        
+        
+        
+        
         return  page.AdditionalVehicle;
-    } // end of addAnother 
-    
-    
-     //creates option list for companies 
+    }
+    //creates option list for companies 
     public static List<SelectOption> getcompanyOptions()
     {
         List<SelectOption> options = new List<SelectOption>(); 
-       	List<Account> lis = [SELECT Name FROM Account];
-       
+        List<Account> lis = [SELECT Name FROM Account];
+        
         for(Account accs :lis )
         {
-           options.add(new SelectOption(accs.id,accs.Name ));
+            options.add(new SelectOption(accs.id,accs.Name ));
         }// end of for
         
         return  options;
     } // getcompanyOptions
     
-    
-    
-     //creates option list for Depot
+    //creates option list for Depot
     public static List<SelectOption> getdepotOptions()
     {
         List<SelectOption> options = new List<SelectOption>(); 
-       	List<Depot__c> lis = [SELECT Name FROM Depot__c];
-       
+        List<Depot__c> lis = [SELECT Name FROM Depot__c];
+        
         for(Depot__c dep :lis )
         {
-           options.add(new SelectOption(dep.id,dep.Name ));
+            options.add(new SelectOption(dep.id,dep.Name ));
         }// end of for
         
         return  options;
     } // getcompanyOptions
     
-     public static List<SelectOption> getManufacturerOptions()
+    public static List<SelectOption> getManufacturerOptions()
     {
         List<SelectOption> options = new List<SelectOption>(); 
-       	List<Manufacturer__c> lis = [SELECT Name FROM Manufacturer__c];
-       
+        List<Manufacturer__c> lis = [SELECT Name FROM Manufacturer__c];
+        
         for(Manufacturer__c man :lis )
         {
-           options.add(new SelectOption(man.id,man.Name ));
+            options.add(new SelectOption(man.id,man.Name ));
         }// end of for
         
         return  options;
     } // getcompanyOptions
     
-   
-   
+    
     // Alex's code for Project
     public PageReference changeLoc() {
         PageReference pageRef = new PageReference('/apex/locations');
         pageRef.setRedirect(true);
         return pageRef;
-    }
+    } // end of changeLoc
     
     //redirect to carList page for rental process
     public PageReference carList() {
@@ -182,7 +178,7 @@ public class CarWizardController
         pageRef.setRedirect(true);
         pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
         return pageRef;
-    }
+    } // end of carList
     
     //redirect to faq page
     public PageReference faq() {
@@ -190,7 +186,7 @@ public class CarWizardController
         pageRef.setRedirect(true);
         pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
         return pageRef;
-    }
+    } // end of faq
     
     //redirect to sell car page
     public PageReference sellCar() {
@@ -198,8 +194,8 @@ public class CarWizardController
         pageRef.setRedirect(true);
         pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
         return pageRef;
-    }
-
+    } // end of sell car
+    
     
     
     
