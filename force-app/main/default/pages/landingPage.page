@@ -2,7 +2,7 @@
     <apex:stylesheet value="{$Resource.style}" />
     <apex:form>
         <apex:pageBlock title="Car Portal">
-            <apex:image value="{!$Resource.logo}"/> <br/>
+            <apex:image value="{!$Resource.logo}" /> <br />
             <apex:pageBlockButtons location="top">
                 <apex:commandButton action="{!changeLoc}" value = "Change Location"/>
                 <apex:commandButton action="{!carList}" value = "Rental Listings"/>

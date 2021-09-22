@@ -1,0 +1,20 @@
+<apex:page docType="html-5.0" controller="TransactionController" showHeader="False">
+    <apex:form id="newPrice">
+        <apex:selectList multiselect="false" size="1" value="{!selectedId}">
+			<apex:selectOptions value="{!carNames}">
+		    </apex:selectOptions> 
+        </apex:selectList> <br/>
+        First Name: <apex:input type="text" value="{!firstName}"/> 
+        Last Name: <apex:input type="text" value="{!lastName}"/> 
+        Birthday: <apex:input type="date" value="{!birthdayDate}"/> <br/>
+        Email: <apex:input type="email" value="{!email}"/> <br/>
+        Issue Date: <apex:input type="date" value="{!issueDate}">
+        <apex:actionSupport event="onchange" action="{!totalPrice}" rerender="newPrice"/>
+        </apex:input><br/>
+        Expected Return Date: <apex:input type="date" value="{!expectedReturnDate}">
+        <apex:actionSupport event="onchange" action="{!totalPrice}" rerender="newPrice"/>
+        </apex:input><br/>
+        Total Price: <apex:outputLabel value="{!tp}"/> <br/>
+        <apex:commandButton value="Rent" action="{!saveRecord}"/>
+    </apex:form>
+</apex:page>
