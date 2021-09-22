@@ -10,6 +10,9 @@ public class landingPageController {
         integer most = 0;
         integer most2 = 0;
         integer most3 = 0;
+        Vehicle__c vehicle1;
+        Vehicle__c vehicle2;
+        Vehicle__c vehicle3;
         for(Integer i = 0; i < contracts.size(); i++) {
             if (!numOfContracts.containsKey(contracts[i].Vehicle__c)) {
                 numOfContracts.put(contracts[i].Vehicle__c, 1);
