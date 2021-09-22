@@ -19,10 +19,13 @@ public class landingPageController {
             } else if(numOfContracts.containsKey(contracts[i].Vehicle__c)) {
                 numOfContracts.put(contracts[i].Vehicle__c, numOfContracts.get(contracts[i].Vehicle__c) + 1);
             }
+            System.debug('Number of contracts for ' + contracts[i].Vehicle__c + ': ' + numOfContracts.get(contracts[i].Vehicle__c));
         }
         if (contracts.size() > 0) {
             for(Integer a = 0; a < vehicleInfo.size(); a++) {
+                System.debug(vehicleInfo[a].Id);
                 Integer num = numofContracts.get(vehicleInfo[a].Id);
+                System.debug('Number of contracts: ' + num);
                 Vehicle__c v = vehicleInfo[a];
                 if (num > most) {
                     most3 = most2;
@@ -42,11 +45,11 @@ public class landingPageController {
                 }
             }
             top3cars = '';
-            if (!vehicle1.Vehicle_year__c.equals(null)) {
+            if (vehicle1.Vehicle_year__c != null) {
                 top3cars += '1. ' + vehicle1.Vehicle_year__c + ' ' + vehicle1.Vehicle_make__c + ' ' + vehicle1.Vehicle_model__c + '\n';
-            } if (!vehicle2.Vehicle_year__c.equals(null)) {
+            } if (vehicle2.Vehicle_year__c != null) {
                 top3cars += '2. ' + vehicle2.Vehicle_year__c + ' ' + vehicle2.Vehicle_make__c + ' ' + vehicle2.Vehicle_model__c + '\n';
-            } if (!vehicle1.Vehicle_year__c.equals(null)) {
+            } if (vehicle1.Vehicle_year__c != null) {
                 top3cars += '3. ' + vehicle3.Vehicle_year__c + ' ' + vehicle3.Vehicle_make__c + ' ' + vehicle3.Vehicle_model__c;
             }
         }
