@@ -48,6 +48,9 @@
     </div>
     <div id="apexBody">
         <apex:form >
+            <apex:pageBlock title="Welcome">
+                <apex:outputText value="Welcome to Car Rental Portal. We are excited to see you here. Please select a rental company and one of its depots before renting out a vehicle." />
+            </apex:pageBlock>
             <apex:pageBlock title="Company">
                 <apex:outputLabel value="Select your company: " />
                 <apex:selectList value="{!accountId}" size="1">
