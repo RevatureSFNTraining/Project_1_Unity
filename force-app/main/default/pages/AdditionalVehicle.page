@@ -6,7 +6,7 @@ DateModified: 9/17/2021
 Description: 
 -->
 
-<apex:page controller="CarWizardController" >
+<apex:page controller="CarWizardController" showHeader="false">
      <apex:form >
           <style>
             .buttons
@@ -57,7 +57,7 @@ Description:
 
             <apex:commandButton value="Exit" action="{!start}"/>
             <apex:commandButton value="Submit and add another Vehicle" action="{!addAnotherVehicle}"/>
-            <apex:commandButton value="Submit" action="{!saveAnother}"/>
+            <apex:commandButton value="Submit" action="{!saveVehicle}"/>
               </div>   
             
         </apex:pageBlock>
