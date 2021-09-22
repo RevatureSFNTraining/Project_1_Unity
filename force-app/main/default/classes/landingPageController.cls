@@ -1,5 +1,7 @@
 public class landingPageController {
-    public String top3cars {get; private set;}
+    public String top1Car {get; private set;}
+    public String top2Car {get; private set;}
+    public String top3Car {get; private set;}
     
     //public controller to grab top 3 rented cars currently
     public landingPageController() {
@@ -44,14 +46,13 @@ public class landingPageController {
                     vehicle3 = v;
                 }
             }
-            top3cars = '';
 
             if (vehicle1.Vehicle_year__c != null) {
-                top3cars += '1. ' + vehicle1.Vehicle_year__c + ' ' + vehicle1.Vehicle_make__c + ' ' + vehicle1.Vehicle_model__c + '\n';
+                top1Car = '1. ' + vehicle1.Vehicle_year__c + ' ' + vehicle1.Vehicle_make__c + ' ' + vehicle1.Vehicle_model__c;
             } if (vehicle2.Vehicle_year__c != null) {
-                top3cars += '2. ' + vehicle2.Vehicle_year__c + ' ' + vehicle2.Vehicle_make__c + ' ' + vehicle2.Vehicle_model__c + '\n';
+                top2Car = '2. ' + vehicle2.Vehicle_year__c + ' ' + vehicle2.Vehicle_make__c + ' ' + vehicle2.Vehicle_model__c;
             } if (vehicle1.Vehicle_year__c != null) {
-                top3cars += '3. ' + vehicle3.Vehicle_year__c + ' ' + vehicle3.Vehicle_make__c + ' ' + vehicle3.Vehicle_model__c;
+                top3Car = '3. ' + vehicle3.Vehicle_year__c + ' ' + vehicle3.Vehicle_make__c + ' ' + vehicle3.Vehicle_model__c;
             }
         }
     }

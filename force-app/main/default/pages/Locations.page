@@ -19,6 +19,17 @@
         .depotLink {
             text-align: center;
         }
+        .logo {
+            display: block;
+            margin: 16px auto;
+
+            width: 300px;
+            height: 150px;
+        }
+        .selectDepotLink {
+            font-size: 16pt;
+            font-weight: bold;
+        }
 
         #apexBody {
             margin: 0 25% 0 25%;
@@ -32,6 +43,9 @@
             padding: 0 auto 0 auto;
         }
     </style>
+    <div id="header">
+        <apex:image styleClass="logo" value="{!$Resource.logo}" alt="Car Rental Portal" />
+    </div>
     <div id="apexBody">
         <apex:form >
             <apex:pageBlock title="Company">
@@ -90,6 +104,13 @@
                                             <apex:outputLink value="http://google.com/maps/search/{!depot.Address__c}" target="_blank">Find in Google Maps</apex:outputLink>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td colspan="2" class="depotLink">
+                                            <apex:commandLink styleClass="selectDepotLink" action="{!selectDepot}" value="Make this my depot!">
+                                                <apex:param name="depot_id" value="{!depot.Id}" />
+                                            </apex:commandLink>
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -102,15 +123,6 @@
                         <apex:actionSupport event="onchange" rerender="depotData" />
                     </apex:selectList>
                 </div>
-                <div>
-                    Selected Depot:
-                    <apex:selectList value="{!selectedDepotId}" size="1">
-                        <apex:selectOptions value="{!depotItems}" />
-                    </apex:selectList>
-                </div>
-            </apex:pageBlock>
-            <apex:pageBlock id="selectedDepotFooter" title="Selected Depot: {!selectedDepotId}">
-                <apex:commandButton action="{!selectDepot}" value="Make this my Depot" />
             </apex:pageBlock>
         </apex:form>
     </div>
