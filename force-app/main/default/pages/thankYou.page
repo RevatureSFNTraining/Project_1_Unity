@@ -1,0 +1,22 @@
+<apex:page controller="returnHome">
+    <style>
+    body, td {
+    /* margin-top: 50%; */
+    text-align: center;
+    align-items: center;
+    color: #333;
+    display: flex;
+    justify-content: center;
+    vertical-align: middle;
+    font-size: 75px;
+}
+    </style>
+    <div id="divElement">
+        <h> Thank You For Renting with us!</h>
+    
+    <apex:form>
+    	<apex:commandButton value="Return to Home Page"/>
+    </apex:form>
+    </div>
+    
+</apex:page>
