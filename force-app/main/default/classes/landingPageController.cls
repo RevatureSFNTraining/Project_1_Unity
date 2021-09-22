@@ -1,7 +1,5 @@
 public class landingPageController {
-    public Vehicle__c vehicle1 {get; set;}
-    public Vehicle__c vehicle2 {get; set;}
-    public Vehicle__c vehicle3 {get; set;}
+    public String top3cars {get; private set;}
     
     //public controller to grab top 3 rented cars currently
     public landingPageController() {
@@ -39,6 +37,9 @@ public class landingPageController {
                 vehicle3 = v;
             }
         }
+        top3cars = '1. ' + vehicle1.Vehicle_year__c + ' ' + vehicle1.Vehicle_make__c + ' ' + vehicle1.Vehicle_model__c + '\n' +
+                    '2. ' + vehicle2.Vehicle_year__c + ' ' + vehicle2.Vehicle_make__c + ' ' + vehicle2.Vehicle_model__c + '\n' +
+                    '3. ' + vehicle3.Vehicle_year__c + ' ' + vehicle3.Vehicle_make__c + ' ' + vehicle3.Vehicle_model__c;
     }
     
     // Check if location has been set or not
