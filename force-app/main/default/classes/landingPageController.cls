@@ -10,9 +10,9 @@ public class landingPageController {
         integer most = 0;
         integer most2 = 0;
         integer most3 = 0;
-        Vehicle__c vehicle1;
-        Vehicle__c vehicle2;
-        Vehicle__c vehicle3;
+        Vehicle__c vehicle1 = new Vehicle__c();
+        Vehicle__c vehicle2 = new Vehicle__c();
+        Vehicle__c vehicle3 = new Vehicle__c();
         for(Integer i = 0; i < contracts.size(); i++) {
             if (!numOfContracts.containsKey(contracts[i].Vehicle__c)) {
                 numOfContracts.put(contracts[i].Vehicle__c, 1);
@@ -20,29 +20,36 @@ public class landingPageController {
                 numOfContracts.put(contracts[i].Vehicle__c, numOfContracts.get(contracts[i].Vehicle__c) + 1);
             }
         }
-        for(Integer a = 0; a < vehicleInfo.size(); a++) {
-            Integer num = numofContracts.get(vehicleInfo[a].Id);
-            Vehicle__c v = vehicleInfo[a];
-            if (num > most) {
-                most3 = most2;
-                most2 = most;
-                most = num;
-                vehicle3 = vehicle2;
-                vehicle2 = vehicle1;
-                vehicle1 = v;
-            } else if (num > most2) {
-                most3 = most2;
-                most2 = num;
-                vehicle3 = vehicle2;
-                vehicle2 = v;
-            } else if(num > most3) {
-                most3 = num;
-                vehicle3 = v;
+        if (contracts.size() > 0) {
+            for(Integer a = 0; a < vehicleInfo.size(); a++) {
+                Integer num = numofContracts.get(vehicleInfo[a].Id);
+                Vehicle__c v = vehicleInfo[a];
+                if (num > most) {
+                    most3 = most2;
+                    most2 = most;
+                    most = num;
+                    vehicle3 = vehicle2;
+                    vehicle2 = vehicle1;
+                    vehicle1 = v;
+                } else if (num > most2) {
+                    most3 = most2;
+                    most2 = num;
+                    vehicle3 = vehicle2;
+                    vehicle2 = v;
+                } else if(num > most3) {
+                    most3 = num;
+                    vehicle3 = v;
+                }
+            }
+            top3cars = '';
+            if (!vehicle1.Vehicle_year__c.equals(null)) {
+                top3cars += '1. ' + vehicle1.Vehicle_year__c + ' ' + vehicle1.Vehicle_make__c + ' ' + vehicle1.Vehicle_model__c + '\n';
+            } if (!vehicle2.Vehicle_year__c.equals(null)) {
+                top3cars += '2. ' + vehicle2.Vehicle_year__c + ' ' + vehicle2.Vehicle_make__c + ' ' + vehicle2.Vehicle_model__c + '\n';
+            } if (!vehicle1.Vehicle_year__c.equals(null)) {
+                top3cars += '3. ' + vehicle3.Vehicle_year__c + ' ' + vehicle3.Vehicle_make__c + ' ' + vehicle3.Vehicle_model__c;
             }
         }
-        top3cars = '1. ' + vehicle1.Vehicle_year__c + ' ' + vehicle1.Vehicle_make__c + ' ' + vehicle1.Vehicle_model__c + '\n' +
-                    '2. ' + vehicle2.Vehicle_year__c + ' ' + vehicle2.Vehicle_make__c + ' ' + vehicle2.Vehicle_model__c + '\n' +
-                    '3. ' + vehicle3.Vehicle_year__c + ' ' + vehicle3.Vehicle_make__c + ' ' + vehicle3.Vehicle_model__c;
     }
     
     // Check if location has been set or not
