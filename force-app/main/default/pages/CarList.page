@@ -1,4 +1,5 @@
 <apex:page controller="CarListController" showHeader="false">
+    <apex:stylesheet value="{!$Resource.style}" />
     <style>
         #ct{
             text-align:center;

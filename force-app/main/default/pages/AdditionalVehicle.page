@@ -7,6 +7,7 @@ Description:
 -->
 
 <apex:page controller="CarWizardController" showHeader="false">
+  <apex:stylesheet value="{!$Resource.style}" />
      <apex:form >
           <style>
             .buttons

@@ -1,4 +1,5 @@
 <apex:page docType="html-5.0" controller="TransactionController" showHeader="False">
+    <apex:stylesheet value="{!$Resource.style}" />
     <style>
             #ht{
                 text-align:center;
