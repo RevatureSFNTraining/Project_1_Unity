@@ -1,7 +1,6 @@
-/* Replace the contents of this file with your static resource */
-
 body {
     background-image: url(/resource/background);
+    font-size: 16px;
 }
 
 .logo {
