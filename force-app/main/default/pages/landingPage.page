@@ -2,6 +2,7 @@
     <!--<apex:stylesheet value="{$Resource.style}" />-->
     <apex:form>
         <apex:pageBlock title="Car Portal">
+            <apex:image value="{!$Resource.logo}" /> <br />
             <apex:pageBlockButtons location="top">
                 <apex:commandButton action="{!changeLoc}" value = "Change Location"/>
                 <apex:commandButton action="{!carList}" value = "Rental Listings"/>
@@ -9,7 +10,7 @@
                 <apex:commandButton action="{!sellCar}" value = "Sell My Car"/>
             </apex:pageBlockButtons>
             <!-- Display top 3 most rented cars at current depot-->
-            <apex:outputField value="{!top3cars}"/>
+            <apex:outputText value="{!top3cars}"/>
             <!--<apex:outputField value="{!vehicle1.vehicle_year__c}"/>
             <apex:outputField value="{!vehicle1.vehicle_make__c}"/>
             <apex:outputField value="{!vehicle1.vehicle_model__c}"/>
