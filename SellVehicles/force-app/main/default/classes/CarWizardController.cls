@@ -2,7 +2,7 @@
 *Name: CarWizardController
 *Author: Julia Weakley
 *DateCreated: 9/13/2021
-*DateModified: 9/17/2021
+*DateModified: 9/21/2021
 *Description: 
 *	
 */
@@ -12,98 +12,97 @@ public class CarWizardController
 {
     public vehicle__c vec {get;set;}
     public Purchase_Transaction__c tran{get;set;}
+    public Depot__c dep {get;set;}
     
     public CarWizardController()
     {
+        // vehicle
         vec = new vehicle__c(); 
+        // purhcase transaction
         tran = new Purchase_Transaction__c(); 
+        // depot
+        dep = new Depot__c(); 
      } // end of CarWizardController
     
     // brings user back to first page of wizard
     public PageReference start()
     {
+        //  attaches id of depot to url 
+        PageReference pageRef = page.sellACar; 
+        pageRef.setRedirect(true);
+        String param = System.currentPageReference().getParameters().get('depot_id');
+        pageRef.getParameters().put('depot_id', param);
+        
+        // new Vehicle to add to Purchase Transaction
         Vehicle__c anewv = new Vehicle__c(); 
+        // new purchase transaction
         Purchase_Transaction__c aNewTran = new Purchase_Transaction__c();
+        // set transactions to be able to reference in additional vechicle creation
         tran.id = aNewTran.Id; 
+        // set vehicle
         vec.id = anewv.id; 
         
-        return page.SellACar; 
+        
+        
+        return pageRef; 
     } // end of start()
     
     // send user to page for filling out Company Information
     public PageReference sellerInfo()
     {
-        
+        // grab depot id
+        String param = System.currentPageReference().getParameters().get('depot_id');
         PageReference pageRef = page.SellerInformation; 
-        String param = pageref.getParameters().get('depotId');
+       	pageRef.setRedirect(true);
         
+        // if id is there set transaction depot to the one saved in the url
         if(!String.isEmpty(param))
         {
              pageref.getParameters().put('depotId',param);
+             dep.Id = param; 
+             tran.Depot__c = dep.id; 
         	return pageRef; 
         }// end of if 
-        pageRef.setRedirect(true);
-        pageref.getParameters().put('depotId','');
+       
+        // placed depot id in next url 
+        pageref.getParameters().put('depot_id',''); 
         
         return pageRef; 
     }// end of sellerInfo
     
-    
-    
-    // send user back to page for filling out company information
-    public PageReference backToYourInfo()
-    {
-        return page.SellerInformation; 
-    }// end of backToYourInfo()
    
-    // send user to page for after vehicle gets saved
+    // send user to transaction completed page
     public PageReference saveVehicle()
     {
-         
        // insert purchase transaction if it does not exist already
         List<Purchase_Transaction__c> tranList = [SELECT ID FROM Purchase_Transaction__c where id =: tran.id];
       	if(tranList.size() == 0)
         {
         	tran.Purchase_Date__c = System.today();
        		insert tran;
-        }
+        } // end of if
       
+        // make sure vehicle is in same transaction and same depot
         vec.Purchase_Transaction__c = tran.Id; 
-        
         vec.Stationed_Depot__c = tran.Depot__c; 
         
+        // save new vehicle 
         insert vec;
-        
-        
-         return Page.CompletedPage; 
+      
+        // place depot id in url 
+        PageReference pageRef = Page.CompletedPage;
+        pageRef.setRedirect(true);
+        pageRef.getParameters().put('depot_id', tran.Depot__c);
+      
+        return pageRef; 
     } // end of saveVehicle()
     
     
    
-    public PageReference saveAnother()
-    {
-       
-       List<Purchase_Transaction__c> tranList = [SELECT ID FROM Purchase_Transaction__c where id =: tran.id];
-      	if(tranList.size() == 0)
-        {
-        	tran.Purchase_Date__c = System.today();
-       		insert tran;
-        }
-         vec.Purchase_Transaction__c = tran.Id; 
-        
-        vec.Stationed_Depot__c = tran.Depot__c; 
-        
-        insert vec;
-
-        PageReference pageRef = Page.CompletedPage;
-        pageRef.setRedirect(true);
-        pageRef.getParameters().put('depot_id', tran.Depot__c); 
-        
-         return pageRef; 
-    }
-    
+   
     public PageReference addAnotherVehicle()
     {
+       
         
        List<Purchase_Transaction__c> tranList = [SELECT ID FROM Purchase_Transaction__c where id =: tran.id];
       	if(tranList.size() == 0)
@@ -115,14 +114,16 @@ public class CarWizardController
         vec.Purchase_Transaction__c = tran.Id; 
         vec.Stationed_Depot__c = tran.Depot__c; 
         
+        // add new vehicle to transaction
         insert vec;
         
         Vehicle__c anotherv = new Vehicle__c(); 
-        vec.id = anotherv.id; 
-        
-        
-        return page.AdditionalVehicle; 
-    }
+        vec.id = anotherv.id;
+
+        return  page.AdditionalVehicle;
+    } // end of addAnother 
+    
+    
      //creates option list for companies 
     public static List<SelectOption> getcompanyOptions()
     {
@@ -136,6 +137,8 @@ public class CarWizardController
         
         return  options;
     } // getcompanyOptions
+    
+    
     
      //creates option list for Depot
     public static List<SelectOption> getdepotOptions()
@@ -164,25 +167,8 @@ public class CarWizardController
         return  options;
     } // getcompanyOptions
     
-    // returns options for transactions
    
-    
-    // creates option list for users
- /**    public List<SelectOption> getauthUsers()
-     {
-         List<SelectOption> options = new List<SelectOption>(); 
-         List<User> users = [SELECT Name FROM User ]; 
-         
-         for(User us :users)
-        {
-           options.add(new SelectOption(us.id,us.Name ));
-        } // end of for
-        
-         return  options;
-         
-     } // end of getauthUsers
-    */
-    
+   
     // Alex's code for Project
     public PageReference changeLoc() {
         PageReference pageRef = new PageReference('/apex/locations');

@@ -5,6 +5,7 @@
 *DateModified: 9/21/2021
 *Description: 
 *	Tests for carWizardController 
+*		
 */
 
 @isTest
@@ -91,22 +92,32 @@ public class CarWizardControllerTest
         Test.startTest();
         CarWizardController con = new carWizardController(); 
          List<Purchase_Transaction__c> tran = [SELECT id FROM Purchase_Transaction__c]; 
+       	PageReference re = page.SellACar; 
+        Test.setCurrentPage(re); 
+        List<Depot__c> tD = [SELECT id FROM Depot__c]; 
+        re.getParameters().put('depot_id',String.valueOf(tD.get(0).id));
         con.sellerInfo();
+        String param = System.currentPageReference().getParameters().get('depot_id');
       	Test.stopTest();
         System.assertEquals(0, tran.size());
     } // end of test 
     
-    // should not have any vehicles added
-   @isTest
-        public static  void backToTest()
+   // no new transactions should be added when sellerinfo page is returned 
+     @isTest
+    public static  void sellerInfoParamTest()
     { 	 
         Test.startTest();
-        CarWizardController con = new carWizardController();
-         List<Vehicle__c> vehicles = [SELECT id FROM Vehicle__c];
-        con.backToYourInfo();
+        CarWizardController con = new carWizardController(); 
+         List<Purchase_Transaction__c> tran = [SELECT id FROM Purchase_Transaction__c]; 
+       	PageReference re = page.SellACar; 
+        Test.setCurrentPage(re); 
+        re.getParameters().put('depot_id','');
+        con.sellerInfo();
+        String param = System.currentPageReference().getParameters().get('depot_id');
       	Test.stopTest();
-         System.assertEquals(0, vehicles.size());
-    } // end of test
+        System.assertEquals('', param);
+    } // end of test 
+  
     
      // should have a new vehicle inserted after page reference
      @isTest
@@ -121,17 +132,7 @@ public class CarWizardControllerTest
     } // end of test
     
     
-    //saveAnother() should have a new vehicle inserted after page reference
-    @isTest
-    public static  void saveAnoTest()
-    { 	 
-        Test.startTest();
-        CarWizardController con = new carWizardController(); 
-        con.saveAnother();
-        List<Vehicle__c> vehicles = [SELECT id FROM Vehicle__c]; 
-        Test.stopTest();
-        System.assertEquals(1, vehicles.size());
-    } // end of test
+   
     
     // After adding another vehicle and then saving another there should be 2 vehicles
     //  shouladdAnotherVehicle()
@@ -141,7 +142,7 @@ public class CarWizardControllerTest
         Test.startTest();
         CarWizardController con = new carWizardController(); 
         con.addAnotherVehicle();
-        con.saveAnother();
+       	con.saveVehicle();
         List<Vehicle__c> vehicles = [SELECT id FROM Vehicle__c];
         Test.stopTest();
          System.assertEquals(2, vehicles.size());
@@ -155,10 +156,55 @@ public class CarWizardControllerTest
         Test.startTest();
         CarWizardController con = new carWizardController(); 
         con.addAnotherVehicle();
-        con.saveAnother();
+        con.saveVehicle();
         List<Purchase_Transaction__c> tran = [SELECT id FROM Purchase_Transaction__c];
         Test.stopTest();
          System.assertEquals(1, tran.size());
     } // end of test  
+    
+    
+    // since no parameters have been set the value should be null
+    @isTest
+    public static void changeLocTest()
+    {
+        Test.startTest();
+         CarWizardController con = new carWizardController(); 
+       
+        PageReference neLoc = con.changeLoc(); 
+        Test.setCurrentPage(neLoc);
+        String param = System.currentPageReference().getParameters().get('depot_id'); 
+        Test.stopTest();
+        System.assertEquals(null, param);
+    }
+     @isTest
+    public static void faqTest()
+    {
+        Test.startTest();
+         CarWizardController con = new carWizardController(); 
+       
+        PageReference nefaq = con.faq(); 
+        Test.stopTest();
+    }
+    @isTest 
+    public static void sellCarTest()
+    {
+        Test.startTest();
+         CarWizardController con = new carWizardController(); 
+       
+        PageReference nesellCar = con.sellCar(); 
+         Test.setCurrentPage(nesellCar);
+        String param = System.currentPageReference().getParameters().get('depot_id'); 
+        Test.stopTest();
+    }
+    
+    @isTest
+    public static void carListTest()
+    {
+        Test.startTest();
+         CarWizardController con = new carWizardController(); 
+       
+        PageReference necarList = con.carList(); 
+        Test.stopTest();
+    }
     
 } // end of test class

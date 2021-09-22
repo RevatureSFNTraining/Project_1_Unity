@@ -6,7 +6,7 @@ DateModified: 9/17/2021
 Description: 
 -->
 
-<apex:page controller="CarWizardController">
+<apex:page controller="CarWizardController" showHeader="false">
     <apex:form >
         <style>
            p, .buttons
@@ -14,7 +14,7 @@ Description:
             		text-align: center; 
             		flex: wrap;
             	}
-           h1
+           h1 
             {
                 font-color: #a20000;
                 border-color: #a20000;
@@ -22,20 +22,31 @@ Description:
             	
             	
             }
-            body
-            {
-            	
-            }
+           
            .bPageBlock
             {
 				text-align: center; 
             	background-color: red;
                 border-color: #a20000;
             }
+           .bPageBlock .pbuttons
+            {
+            	text-align: start; 
+            	
+            }
         </style>
+        
         <apex:outputPanel styleClass="section" layout="block">
-    	<apex:pageBlock  >
-       	
+    	<apex:pageBlock >
+		
+            <div class="Pbuttons">
+            <apex:pageBlockButtons location="top"  >
+                <apex:commandButton action="{!changeLoc}" value = "Change Location"/>
+                <apex:commandButton action="{!carList}" value = "Rental Listings"/>
+                <apex:commandButton action="{!faq}" value = "FAQ/Issues"/>
+                <apex:commandButton action="{!sellCar}" value = "Sell My Car"/>
+            </apex:pageBlockButtons>
+            </div>	
             <h1>Sell Your Vehicle to Us</h1>
         <p>Hello, thank you for selling your Vehicle. Click Start to begin. </p>
         <br/>

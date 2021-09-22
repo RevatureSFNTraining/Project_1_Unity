@@ -6,7 +6,7 @@ DateModified: 9/17/2021
 Description: 
 -->
 
-<apex:page controller="CarWizardController">
+<apex:page controller="CarWizardController" showHeader="false">
     <apex:form >
         <style>
             .buttons
