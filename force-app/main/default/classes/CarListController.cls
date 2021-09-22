@@ -32,6 +32,7 @@ public class CarListController {
     }
     public PageReference redirect() {
         PageReference p = new PageReference('/apex/TransactionPage');
+        p.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
         p.setRedirect(true);
         return p;
     } 

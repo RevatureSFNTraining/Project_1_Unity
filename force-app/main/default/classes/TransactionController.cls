@@ -41,6 +41,8 @@ public class TransactionController {
         List<Depot__c> depotList = [SELECT id, Owner__c FROM Depot__c WHERE id =: vehicleDepot[0].stationed_Depot__c];
         newRental.Company__c = depotList[0].Owner__c;
         insert newRental;
-        return null;
+        PageReference pageRef = new PageReference('/apex/thankYou');
+        pageRef.getParameters().put('depot_id',System.currentPageReference().getParameters().get('depot_id'));
+        return pageRef;
     }
 }
