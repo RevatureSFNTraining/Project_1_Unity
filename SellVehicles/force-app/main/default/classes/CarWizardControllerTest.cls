@@ -163,39 +163,59 @@ public class CarWizardControllerTest
     } // end of test  
     
     
-    // since no parameters have been set the value should be null
+   
     @isTest
     public static void changeLocTest()
     {
+        // start test
         Test.startTest();
          CarWizardController con = new carWizardController(); 
        
         PageReference neLoc = con.changeLoc(); 
         Test.setCurrentPage(neLoc);
         String param = System.currentPageReference().getParameters().get('depot_id'); 
+        
+        // stop test
         Test.stopTest();
+        
+         // since no parameters have been set the value should be null
         System.assertEquals(null, param);
-    }
-     @isTest
+    } // end of test
+    
+    
+    @isTest
     public static void faqTest()
     {
+        Depot__c tempfaq = new Depot__c();
         Test.startTest();
          CarWizardController con = new carWizardController(); 
-       
-        PageReference nefaq = con.faq(); 
+         PageReference nefaq = con.faq();
+       	  
+         insert tempfaq; 
+         nefaq.getParameters().put('depot_id', tempfaq.Id);
+         Test.setCurrentPage(nefaq);
+         String param = System.currentPageReference().getParameters().get('depot_id'); 
+        
         Test.stopTest();
-    }
+        // value should be the id of the new dpot since it was put in as a parameter 
+        System.assertEquals( tempfaq.Id, param);
+    } // end of test
+    
     @isTest 
     public static void sellCarTest()
     {
+        // begin test 
         Test.startTest();
-         CarWizardController con = new carWizardController(); 
-       
+        CarWizardController con = new carWizardController(); 
         PageReference nesellCar = con.sellCar(); 
-         Test.setCurrentPage(nesellCar);
+        Test.setCurrentPage(nesellCar);
         String param = System.currentPageReference().getParameters().get('depot_id'); 
+        // stop test
         Test.stopTest();
-    }
+        
+        // should return null since no parameters were put
+        System.assertEquals(null, param);
+    } // end of test
     
     @isTest
     public static void carListTest()
@@ -204,7 +224,11 @@ public class CarWizardControllerTest
          CarWizardController con = new carWizardController(); 
        
         PageReference necarList = con.carList(); 
+         String param = System.currentPageReference().getParameters().get('depot_id'); 
         Test.stopTest();
-    }
+        
+        // since no parameters were added the value should be null
+        System.assertEquals(null, param);
+    } // end of test
     
 } // end of test class
