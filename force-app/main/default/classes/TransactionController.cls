@@ -6,7 +6,7 @@ public class TransactionController {
     public Date birthdayDate{get;set;}
     public String email{get;set;}
     public String firstName{get;set;}
-    public String lastName{get;set}
+    public String lastName{get;set;}
     List<selectOption> vehicleOptions = new List<selectOption>();
     public List<selectOption> getCarNames() {
         for(Vehicle__c vn : [SELECT Name FROM Vehicle__c WHERE Status__c != 'Lost/Stolen' OR Status__c != 'Decomissioned']) {
