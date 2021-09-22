@@ -1,4 +1,5 @@
 <apex:page standardController="Case" extensions="CaseController" showHeader="false" title="FAQ">
+    <apex:stylesheet value="{!$Resource.style}" />
     <apex:pageBlock>
         <apex:form>
             <apex:pageBlock>

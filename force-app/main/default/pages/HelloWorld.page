@@ -1,4 +1,5 @@
 <apex:page >
+    <apex:stylesheet value="{!$Resource.style}" />
     <apex:pageBlock title="Hello World">
         <apex:pageBlockSection >
             Hello world!

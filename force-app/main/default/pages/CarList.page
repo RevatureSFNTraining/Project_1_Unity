@@ -1,5 +1,6 @@
 <apex:page controller="CarListController" showHeader="false">
-     <apex:form>
+    <apex:stylesheet value="{!$Resource.style}" />
+    <apex:form>
         <apex:pageBlock title="Cars For Rent">
             <apex:pageBlockTable value="{!vehicleList}" var="cl">
 				<apex:column value="{!cl.Name}"/>
