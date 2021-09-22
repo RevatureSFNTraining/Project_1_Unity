@@ -7,15 +7,13 @@ public class DepotController {
     
     public String accountId {get; set;}
     public String pageNumber {get; set;}
-    public String selectedDepotId {get; set;}
 
     public String nameFilter {get; set;}
     public String locationFilter {get; set;}
     
     public DepotController() {
         accounts = [SELECT Id, Name FROM Account];
-        depots = new List<Depot__c>(); //empty list for now
-        pageNumber = '1';
+        filterDepots();
     }
     
     public List<SelectOption> getAccountItems() {
@@ -24,18 +22,6 @@ public class DepotController {
             items.add(new SelectOption(acc.Id, acc.Name));
         }
         accountId = items[0].getValue();
-        return items;
-    }
-    
-    public List<SelectOption> getDepotItems() {
-        List<SelectOption> items = new List<SelectOption>();
-        for (Depot__c depot : depots) {
-            items.add(new SelectOption(depot.Id, depot.Name));
-        }
-        if (items.size() > 0)
-            selectedDepotId = items[0].getValue();
-        else
-            selectedDepotId = null;
         return items;
     }
     
@@ -77,7 +63,7 @@ public class DepotController {
 
     public PageReference selectDepot() {
         PageReference pf = new PageReference('/apex/LandingPage');
-        pf.getParameters().put('depot_id', selectedDepotId);
+        pf.getParameters().put('depot_id', System.currentPageReference().getParameters().get('depot_id'));
         return pf;
     }
 }
