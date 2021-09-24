@@ -11,11 +11,11 @@
     vertical-align: middle;
 }
     </style>
-    <apex:pageBlock>
+    <apex:pageBlock >
         <div id="divElement">
             <h> Thank You For Renting with us!</h>
         
-        <apex:form>
+        <apex:form >
             <apex:commandButton action="{!returnToHome}" value="Return to Home Page"/>
         </apex:form>
         </div>

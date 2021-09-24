@@ -35,10 +35,10 @@ Description:
             
             <apex:pageBlockButtons location="top" styleClass="nav" >
                 <div style="float: left">
-                    <apex:commandButton action="{!changeLoc}" value = "Change Location"/>
-                    <apex:commandButton action="{!carList}" value = "Rental Listings"/>
-                    <apex:commandButton action="{!faq}" value = "FAQ/Issues"/>
-                    <apex:commandButton action="{!sellCar}" value = "Sell My Car"/>
+                    <apex:commandButton action="{!changeLoc}" value="Change Location"/>
+                    <apex:commandButton action="{!carList}" value="Rental Listings"/>
+                    <apex:commandButton action="{!faq}" value="FAQ/Issues"/>
+                    <apex:commandButton action="{!sellCar}" value="Sell My Car"/>
                 </div>
             </apex:pageBlockButtons>
             

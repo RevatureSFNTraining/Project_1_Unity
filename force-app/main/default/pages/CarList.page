@@ -6,13 +6,13 @@
             font-size:xx-large;
         }
     </style> 
-    <apex:form>
-        <apex:pageBlock>
+    <apex:form >
+        <apex:pageBlock >
             <apex:pageBlockButtons location="top">
-                <apex:commandButton action="{!changeLoc}" value = "Change Location"/>
-                <apex:commandButton action="{!carList}" value = "Rental Listings"/>
-                <apex:commandButton action="{!faq}" value = "FAQ/Issues"/>
-                <apex:commandButton action="{!sellCar}" value = "Sell My Car"/>
+                <apex:commandButton action="{!changeLoc}" value="Change Location"/>
+                <apex:commandButton action="{!carList}" value="Rental Listings"/>
+                <apex:commandButton action="{!faq}" value="FAQ/Issues"/>
+                <apex:commandButton action="{!sellCar}" value="Sell My Car"/>
             </apex:pageBlockButtons>
         </apex:pageBlock>
         <div id="ct">

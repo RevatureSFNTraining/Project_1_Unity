@@ -19,7 +19,8 @@ public class CarWizardControllerTest
         	insert testaccount; 
         
         	Depot__c testDepot = new Depot__c(); 
-        	testDepot.Name ='TestD'; 
+        	testDepot.Name ='TestD';
+            testDepot.Owner__c = testAccount.Id; 
         	insert testDepot; 
     } // end of setup 
     

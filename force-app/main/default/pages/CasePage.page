@@ -1,8 +1,8 @@
 <apex:page standardController="Case" extensions="CaseController" showHeader="false" title="FAQ">
     <apex:stylesheet value="{!$Resource.style}" />
-    <apex:pageBlock>
-        <apex:form>
-            <apex:pageBlock>
+    <apex:pageBlock >
+        <apex:form >
+            <apex:pageBlock >
                 <apex:pageBlockButtons location="top">
                     <apex:commandButton action="{!changeLoc}" value="Change Location" />
                     <apex:commandButton action="{!carList}" value="Rental Listings" />
@@ -109,7 +109,7 @@
                     payments at the moment.</font>
             </apex:pageBlockSection>
         </div>
-        <apex:pageBlock>
+        <apex:pageBlock >
             <div style="font-size:16px">
                 <apex:messages />
                 <apex:pageBlockSection title="Create a Case" id="test">
